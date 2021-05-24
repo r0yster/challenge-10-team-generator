@@ -1,14 +1,33 @@
 const Employee = require('../lib/Employee');
 
 test('creates a employee object.', () => {
-    const employee = new Employee('Edgar',123456,'test@test.com');
+    const testEmployee = new Employee('Edgar',123456,'test@test.com');
 
+    expect(testEmployee.name).toEqual(expect.any(String));
+    expect(testEmployee.id).toEqual(expect.any(Number));
+    expect(testEmployee.email).toEqual(expect.any(String));
+});
 
-    expect(employee.name).toEqual(expect.any(String));
-    expect(employee.id).toEqual(expect.any(Number));
-    expect(employee.email).toEqual(expect.any(String));
-    expect(employee.getName()).toEqual(expect.any(String));
-    expect(employee.getId()).toEqual(expect.any(Number));
-    expect(employee.getEmail()).toEqual(expect.any(String));
-    expect(employee.getRole()).toEqual(expect.any(String));
+test('checks if getName() function returns a String', () => {
+    const testEmployee = new Employee('Edgar',123456,'test@test.com');
+
+    expect(testEmployee.getName()).toEqual(expect.any(String));
+});
+
+test('checks if getId() function returns a number', () => {
+    const testEmployee = new Employee('Edgar',123456,'test@test.com');
+
+    expect(testEmployee.getId()).toEqual(expect.any(Number));
+});
+
+test('checks if getEmail() function returns a String', () => {
+    const testEmployee = new Employee('Edgar',123456,'test@test.com');
+
+    expect(testEmployee.getEmail()).toEqual(expect.any(String));
+});
+
+test('checks if getRole() function returns a String', () => {
+    const testEmployee = new Employee('Edgar',123456,'test@test.com');
+
+    expect(testEmployee.getRole()).toEqual('Employee');
 });
