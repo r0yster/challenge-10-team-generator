@@ -1,12 +1,14 @@
+const fs = require('fs');
 const inquirer = require('inquirer');
+const generatePage = require('./src/page-template.js');
+const { writeFile, copyFile } = require('./util/generate-site');
+
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-let empData = [];
-
 const getMgrData = () => {
-    inquirer
+    return inquirer
         .prompt([
         {
             type: 'text',
@@ -31,13 +33,15 @@ const getMgrData = () => {
     ])
     .then( data => {
         let teamMgr = new Manager(data.mgrName, data.mgrId, data.mgrEmail, data.mgrOfficeNum);
-        empData.push(teamMgr);
-        getEmpData();
+        return teamMgr;
     })
 };
 
-const getEmpData = () => {
-    inquirer
+const getEmpData = empData => {
+    if(!empData.employees) {
+        empData.employees = [];
+    }
+    return inquirer
         .prompt([
             {
                 type: 'list',
@@ -81,23 +85,43 @@ const getEmpData = () => {
             if (data.action === 'Add Engineer') {
                 let emp = new Engineer(data.empName, data.empId, data.empEmail, data.username);
 
-                empData.push(emp);
-                console.log(empData);
+                empData.employees.push(emp);
+                // console.log(empData);
 
-                getEmpData();
+                return getEmpData(empData);
 
             } else if (data.action === 'Add Intern') {
                 let emp = new Intern(data.empName, data.empId, data.empEmail, data.school);
 
-                empData.push(emp);
-                console.log(empData);
+                empData.employees.push(emp);
+                // console.log(empData);
 
-                getEmpData();
+                return getEmpData(empData);
 
             } else {
-                console.log(empData);
+                //console.log(empData);
+                return empData;
             }
-        })
-}
+        });
+};
 
-getMgrData();
+getMgrData()
+    .then(getEmpData)
+    .then(empDir => {
+        //console.log(empDir)
+        return generatePage(empDir)
+    })
+    .then(pageHTML => {
+        console.log(pageHTML);
+        return writeFile(pageHTML);
+    })
+    .then(writeFileResponse => {
+        console.log(writeFileResponse);
+        return copyFile();
+    })
+    .then(copyFileResponse => {
+        console.log(copyFileResponse);
+    })
+    .catch(err => {
+        console.log(err);
+    });
