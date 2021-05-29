@@ -1,12 +1,12 @@
 const generateManager = mgrData => {
     return `
     <section class="my-3" id="mgr-info">
-        <h2 class="text-dark bg-primary p-2 display-inline-block">Contact Information:</h2>
-        <div class="col-12 mb-2 bg-dark text-light p-3">
+        <h2 class="card text-light bg-primary p-2 display-inline-block">Contact Information:</h2>
+        <div class="card col-12 mb-2 bg-dark text-light p-3">
             <h3 class="portfolio-item-title text-light">${mgrData.name}</h3>
             <h5 class="portfolio-item-title text-light">${mgrData.role}</h5>
             <p>Employee ID: ${mgrData.id}</p>
-            <p>Email: ${mgrData.email}</p>
+            <p>Email: <a class="text-light" href="mailto:${mgrData.email}">${mgrData.email}</a></p>
             <p>Office #: ${mgrData.officeNum}</p>
         </div>
     </section>    
@@ -16,18 +16,18 @@ const generateManager = mgrData => {
 const generateEngineers = empData => {
     return `
     <section class="my-3" id="eng-list">
-        <h2 class="text-dark bg-primary p-2 display-inline-block">Engineers</h2>
+        <h2 class="card text-light bg-primary p-2 display-inline-block">Engineers:</h2>
         <div class="flex-row justify-space-between">
         ${empData
             .filter(emp => emp.role === 'Engineer')
             .map(({name, id, email, role, username}) => {
                 return `
-                <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
+                <div class="card col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
                     <h3 class="portfolio-item-title text-light">${name}</h3>
-                    <h5 class="portfolio-languages">${role}</h5>
+                    <h5 class="portfolio-item-title text-light">${role}</h5>
                     <p>Employee ID: ${id}</p>
-                    <p>Email: ${email}</p>
-                    <p>GitHub Username: ${username}</p>
+                    <p>Email: <a class="text-light" href="mailto:${email}">${email}</a></p>
+                    <p>GitHub Username: <a class="text-light" href="https://github.com/${username}">${username}</a></p>
                 </div>
             `;
             }).join('')}
@@ -39,17 +39,17 @@ const generateEngineers = empData => {
 const generateInterns = empData => {
     return `
     <section class="my-3" id="intern-list">
-        <h2 class="text-dark bg-primary p-2 display-inline-block">Interns</h2>
+        <h2 class="card text-light bg-primary p-2 display-inline-block">Interns:</h2>
         <div class="flex-row justify-space-between">
         ${empData
             .filter(emp => emp.role === 'Intern')
             .map(({name, id, email, role, school}) => {
                 return `
-                <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
+                <div class="card col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
                     <h3 class="portfolio-item-title text-light">${name}</h3>
-                    <h5 class="portfolio-languages">${role}</h5>
+                    <h5 class="portfolio-item-title text-light">${role}</h5>
                     <p>Employee ID: ${id}</p>
-                    <p>Email: ${email}</p>
+                    <p>Email: <a class="text-light" href="mailto:${email}">${email}</a></p>
                     <p>School: ${school}</p>
                 </div>
             `;
@@ -77,12 +77,11 @@ module.exports = templateData => {
     <body>
         <header>
             <div class="container flex-row justify-space-between align-center py-3">
-                <h1 class="page-title text-secondary bg-dark py-2 px-3">Employee Directory</h1>
-                <p>${templateData.employees.length} Total Employees</p>
+                <h1 class="page-title text-secondary text-light py-2 px-3">Employee Directory</h1>
                 <nav class="flex-row">
-                    <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="#mgr-info">Your Info</a>
-                    <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="#eng-list">Engineers</a>
-                    <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="#intern-list">Interns</a>
+                    <a class="ml-2 my-1 px-2 py-1 text-light" href="#mgr-info">Your Info</a>
+                    <a class="ml-2 my-1 px-2 py-1 text-light" href="#eng-list">Engineers</a>
+                    <a class="ml-2 my-1 px-2 py-1 text-light" href="#intern-list">Interns</a>
                 </nav>
             </div>
         </header>
