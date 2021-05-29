@@ -32,4 +32,4 @@ WHEN I decide to finish building my team
 THEN I exit the application, and the HTML is generated
 
 ## Video
-https://drive.google.com/file/d/10cgfU6E4b2h6p9AcWuYaK-i5vq5I7Rw5/view
+[Video Walkthrough Here](https://drive.google.com/file/d/10cgfU6E4b2h6p9AcWuYaK-i5vq5I7Rw5/view)
