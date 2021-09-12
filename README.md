@@ -1,4 +1,4 @@
-# challenge-10-team-generator
+# team-generator
 
 ## Description
 Command-line appliation that takes in information about employees and generates an HTML webpage that displays summaries for each employee. Unit tests also incorporated to test all classes
